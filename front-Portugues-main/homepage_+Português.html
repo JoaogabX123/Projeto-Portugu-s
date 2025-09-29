@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - +Português</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #3498db;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e74c3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "📚";
+            font-size: 1.8rem;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        .user-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-new {
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-new:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 120px 0 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-message {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        /* Search Bar */
+        .search-section {
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+
+        .search-container {
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3.5rem 1.2rem 1.5rem;
+            border: none;
+            font-size: 1.1rem;
+            outline: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border: none;
+            border-radius: 10px;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Search Dropdown */
+       .search-dropdown {
+    position: relative
+    ;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1100; /* Corrigido para não sobrepor o header */
+}
+
+
+        .search-dropdown.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .search-section-header {
+            padding: 1rem 1.5rem 0.5rem;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .search-option {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .search-option:hover {
+            background: #f8f9fa;
+        }
+
+        .search-option-icon {
+            font-size: 1.1rem;
+        }
+
+        /* Filter Groups */
+        .filter-groups {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .group-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .group-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .group-card.grammar::before {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+
+        .group-card.literature::before {
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
+        }
+
+        .group-card.writing::before {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+        }
+
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .group-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .group-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .group-description {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .group-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .group-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-group {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .btn-secondary:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .quick-action {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #2c3e50;
+        }
+
+        .quick-action:hover {
+            background: #ecf0f1;
+            transform: translateY(-2px);
+        }
+
+        .quick-action-icon {
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .quick-action-text {
+            flex: 1;
+        }
+
+        .quick-action-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .quick-action-desc {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+
+        /* Decorative Elements */
+        .decorative-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -100;
+        }
+
+        .element {
+            position: absolute;
+            opacity: 0.05;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        .element:nth-child(4) {
+            top: 40%;
+            right: 25%;
+            font-size: 2.5rem;
+            animation-delay: 1s;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-message {
+                font-size: 2rem;
+            }
+
+            .groups-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-right {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .group-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .group-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .group-card,
+            .quick-actions {
+                padding: 1.5rem;
+            }
+
+            .main-content {
+                padding: 100px 0 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative Background Elements -->
+    <div class="decorative-elements">
+        <div class="element">📝</div>
+        <div class="element">📖</div>
+        <div class="element">✏️</div>
+        <div class="element">📚</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">+Português</a>
+            <div class="nav-right">
+                <a href="#" class="btn-new">+ Nova Questão</a>
+                <div class="user-menu">
+                    <a href="#" class="user-btn">
+                        👨‍🏫 Prof. João
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="welcome-message">Bem-vindo de volta! 👋</h1>
+                <p class="subtitle">Gerencie e organize sua biblioteca de questões</p>
+            </div>
+
+            <!-- Search Section -->
+            <div class="search-section">
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        placeholder="Pesquisar questões por título, filtro ou conteúdo..."
+                        id="searchInput"
+                    >
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+                
+                <!-- Search Dropdown -->
+                <div class="search-dropdown" id="searchDropdown">
+                    <div class="search-section-header">Filtros Disponíveis</div>
+                    <div class="search-option" onclick="selectFilter('Análise Línguistica')">
+                        <span class="search-option-icon">📝</span>
+                        <div>
+                            <div>Análise Linguística</div>
+                            <small style="color: #7f8c8d;">40 questões</small>
+                        </div>
+                    </div>
+                    <div class="search-option" onclick="selectFilter('Literatura')">
+                        <span class="search-option-icon">📖</span>
+                        <div>
+                            <div>Literatura</div>
+                            <small style="color: #7f8c8d;">15 questões</small>
+                        </div>
+                    </div>
+                    <div class="search-option" onclick="selectFilter('Interpretação Textual')">
+                        <span class="search-option-icon">✏️</span>
+                        <div>
+                            <div>Interpretação Textual</div>
+                            <small style="color: #7f8c8d;">17 questões</small>
+                        </div>
+                    </div>
+                    
+                    <div class="search-section-header">Ações Rápidas</div>
+                    <div class="search-option" onclick="openAdvancedSearch()">
+                        <span class="search-option-icon">🔍</span>
+                        <div>Busca Avançada</div>
+                    </div>
+                    <div class="search-option" onclick="createNewQuestion()">
+                        <span class="search-option-icon">➕</span>
+                        <div>Criar Nova Questão</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Groups -->
+            <section class="filter-groups">
+                <h2 class="section-title">
+                    📂 Seus Filtros de Questões mais recentes
+                </h2>
+                
+                <div class="groups-grid">
+                    <!-- Gramática Group -->
+                   <div class="group-card grammar">
+        <div class="group-icon">📝</div>
+        <h3 class="group-title">Análise Linguística</h3>
+        <div class="group-stats">
+            <div class="stat-item">
+                <div class="stat-number">40</div>     
+                <div class="stat-label">Questões</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">8</div>     
+                <div class="stat-label">Subgêneros</div>
+            </div>
+        </div>
+        <div class="group-actions">
+            <a href="#" class="btn-group btn-primary">Visualizar</a>
+            <a href="#" class="btn-group btn-secondary">Editar</a>
+        </div>
+    </div>
+                    <!-- Literatura Group -->
+                    <div class="group-card literature">
+                        <div class="group-icon">📖</div>
+                        <h3 class="group-title">Literatura</h3>
+                        
+                        <div class="group-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">15</div>
+                                <div class="stat-label">Questões</div>
+                            </div>
+                             <div class="stat-item">
+                <div class="stat-number">5</div>     
+                <div class="stat-label">Subgêneros</div>
+            </div>
+                        </div>
+                        
+                        
+                        <div class="group-actions">
+                            <a href="#" class="btn-group btn-primary">Visualizar</a>
+                            <a href="#" class="btn-group btn-secondary">Editar</a>
+                        </div>
+                    </div>
+
+                    <!-- Redação Group -->
+                    <div class="group-card writing">
+                        <div class="group-icon">✏️</div>
+                        <h3 class="group-title">Interpretação Textual</h3>
+                        
+                        <div class="group-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">17</div>
+                                <div class="stat-label">Questões</div>
+                            </div>
+                             <div class="stat-item">
+                <div class="stat-number">10</div>     
+                <div class="stat-label">Subgêneros</div>
+            </div>
+                        </div>
+                        <div class="group-actions">
+                            <a href="#" class="btn-group btn-primary">Visualizar</a>
+                            <a href="#" class="btn-group btn-secondary">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h2 class="section-title">
+                    ⚡ Ações Rápidas
+                </h2>
+                
+                <div class="quick-actions-grid">
+                    <a href="#" class="quick-action">
+                        <div class="quick-action-icon">➕</div>
+                        <div class="quick-action-text">
+                            <div class="quick-action-title">Criar Questão</div>
+                            <div class="quick-action-desc">Nova questão do zero</div>
+                        </div>
+                    </a>
+                    
+                    
+                    <a href="#" class="quick-action">
+                        <div class="quick-action-icon">📊</div>
+                        <div class="quick-action-text">
+                            <div class="quick-action-title">Relatórios</div>
+                            <div class="quick-action-desc">Análise do banco</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchDropdown = document.getElementById('searchDropdown');
+
+        // Show/hide search dropdown
+        searchInput.addEventListener('focus', function() {
+            searchDropdown.classList.add('active');
+        });
+
+        searchInput.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                searchDropdown.classList.add('active');
+                // Here you would filter the dropdown options based on input
+            }
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-section')) {
+                searchDropdown.classList.remove('active');
+            }
+        });
+
+        // Search button click
+        searchBtn.addEventListener('click', function() {
+            const query = searchInput.value.trim();
+            if (query) {
+                performSearch(query);
+            }
+        });
+
+        // Enter key search
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (query) {
+                    performSearch(query);
+                }
+            }
+        });
+
+        // Search functions
+        function selectFilter(filterName) {
+            searchInput.value = filterName;
+            searchDropdown.classList.remove('active');
+            performSearch(filterName);
+        }
+
+        function performSearch(query) {
+            // Here you would implement the actual search logic
+            console.log('Searching for:', query);
+            
+            // Show loading state
+            searchBtn.innerHTML = '⏳';
+            
+            // Simulate search
+            setTimeout(() => {
+                searchBtn.innerHTML = '🔍';
+                alert(`Buscando por: "${query}"\n\nEsta função redirecionaria para a página de resultados.`);
+            }, 1000);
+        }
+
+        function openAdvancedSearch() {
+            searchDropdown.classList.remove('active');
+            alert('Abrindo busca avançada...\n\nEsta função abriria uma página com filtros detalhados.');
+        }
+
+        function createNewQuestion() {
+            searchDropdown.classList.remove('active');
+            alert('Redirecionando para criação de questão...\n\nEsta função abriria o formulário de nova questão.');
+        }
+
+        // Entrance animations
+        window.addEventListener('load', function() {
+            const animatedElements = document.querySelectorAll('.page-header, .search-section, .filter-groups, .quick-actions');
+            animatedElements.forEach((element, index) => {
+                element.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
+            });
+        });
+
+        // Group card interactions
+        document.querySelectorAll('.group-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Quick action clicks
+        document.querySelectorAll('.quick-action').forEach(action => {
+            action.addEventListener('click', function(e) {
+                e.preventDefault();
+                const title = this.querySelector('.quick-action-title').textContent;
+                
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+                
+                // Simulate action
+                setTimeout(() => {
+                    alert(`Ação: ${title}\n\nEsta função seria implementada para ${title.toLowerCase()}.`);
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

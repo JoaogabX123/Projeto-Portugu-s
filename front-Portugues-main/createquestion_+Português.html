@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Questão - +Português</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Mini */
+        .header-mini {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e74c3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "📚";
+            font-size: 1.5rem;
+        }
+
+        /* Main Form */
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60, #3498db);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            color: #34495e;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group.required label::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            background: white;
+            transform: translateY(-1px);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #bdc3c7;
+        }
+
+        /* Enunciado Section */
+        .enunciado-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .enunciado-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .character-count {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            float: right;
+            margin-top: 0.5rem;
+        }
+
+        /* Image Upload */
+        .image-upload {
+            margin-top: 1rem;
+        }
+
+        .image-upload-area {
+            border: 2px dashed #bdc3c7;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .image-upload-area:hover {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .image-upload-area.dragover {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-top: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .remove-image {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-image:hover {
+            background: #c0392b;
+        }
+
+        /* Alternativas Section */
+        .alternativas-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #f39c12;
+        }
+
+        .alternativa-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .alternativa-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .alternativa-radio {
+            margin-top: 0.5rem;
+        }
+
+        .alternativa-input {
+            flex: 1;
+            margin: 0;
+        }
+
+        .remove-alternativa-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            height: fit-content;
+            margin-top: 0.5rem;
+        }
+
+        .remove-alternativa-btn:hover {
+            background: #c0392b;
+        }
+
+        .add-alternativa {
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-alternativa:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        /* Form Row */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #9b59b6;
+        }
+
+        /* Resposta Section */
+        .resposta-section {
+            background: #f0f8ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .resposta-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Fonte Section */
+        .fonte-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #e67e22;
+        }
+
+        .fonte-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background: #bdc3c7;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #27ae60;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::before {
+            transform: translateX(25px);
+        }
+
+        .fonte-fields {
+            display: none;
+        }
+
+        .fonte-fields.active {
+            display: block;
+        }
+
+        /* Buttons */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .btn-preview {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-preview:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #27ae60;
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .form-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header-mini {
+                padding: 1rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Loading state */
+        .btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn.loading::after {
+            content: "";
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Preview Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Subgênero Styles */
+        .subgenero-group {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #9b59b6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Mini -->
+    <div class="container">
+        <div class="header-mini">
+            <a href="#" class="back-btn" onclick="window.history.back()">
+                ← Voltar ao Dashboard
+            </a>
+            <a href="#" class="logo">+Português</a>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <strong>Sucesso!</strong> Questão criada e salva no banco de dados.
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Criar Nova Questão</h1>
+                <p>Preencha os campos abaixo para criar uma questão personalizada</p>
+            </div>
+
+            <form id="questionForm">
+                <!-- Tipo de Questão -->
+                <div class="form-row">
+                    <div class="form-group required">
+                        <label for="tipo-questao">Tipo de Questão</label>
+                        <select id="tipo-questao" name="tipo-questao" required>
+                            <option value="">Selecione...</option>
+                            <option value="fechada">Questão Objetiva</option>
+                            <option value="aberta">Questão Dissertativa</option>
+                        </select>
+                    </div>
+                    <div class="form-group required">
+                        <label for="titulo">Título da Questão</label>
+                        <input 
+                            type="text" 
+                            id="titulo" 
+                            name="titulo" 
+                            placeholder="Ex: Análise Sintática - Período Composto"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Enunciado -->
+                <div class="enunciado-section">
+                    <h3>📝 Enunciado</h3>
+                    <div class="form-group required">
+                        <label for="enunciado">Texto do Enunciado</label>
+                        <textarea 
+                            id="enunciado" 
+                            name="enunciado" 
+                            placeholder="Escreva aqui o enunciado da questão..."
+                            required
+                            maxlength="20000"
+                        ></textarea>
+                        <div class="character-count">
+                            <span id="charCount">0</span>/20000 caracteres
+                        </div>
+                    </div>
+
+                    <!-- Upload de Imagem -->
+                    <div class="image-upload">
+                        <label>Imagem (opcional)</label>
+                        <div class="image-upload-area" id="imageUpload">
+                            <p>📷 Clique para adicionar imagem ou arraste aqui</p>
+                            <small>Formatos: JPG, PNG, GIF (máx. 5MB)</small>
+                        </div>
+                        <input type="file" id="imageFile" accept="image/*" style="display: none;">
+                        <div id="imagePreview"></div>
+                    </div>
+                </div>
+
+                <!-- Alternativas (para questões fechadas) -->
+                <div class="alternativas-section" id="alternativasSection">
+                    <h3>📋 Alternativas</h3>
+                    <div id="alternativasContainer">
+                        <div class="alternativa-item">
+                            <input type="radio" name="gabarito" value="A" class="alternativa-radio" required>
+                            <textarea placeholder="Alternativa A" class="alternativa-input" required style="min-height:60px;"></textarea>
+                        </div>
+                        <div class="alternativa-item">
+                            <input type="radio" name="gabarito" value="B" class="alternativa-radio">
+                            <textarea placeholder="Alternativa B" class="alternativa-input" required style="min-height:60px;"></textarea>
+                        </div>
+                        <div class="alternativa-item">
+                            <input type="radio" name="gabarito" value="C" class="alternativa-radio">
+                            <textarea placeholder="Alternativa C" class="alternativa-input" required style="min-height:60px;"></textarea>
+                        </div>
+                        <div class="alternativa-item">
+                            <input type="radio" name="gabarito" value="D" class="alternativa-radio">
+                            <textarea placeholder="Alternativa D" class="alternativa-input" required style="min-height:60px;"></textarea>
+                        </div>           
+                    </div>
+                    <button type="button" class="add-alternativa" onclick="addAlternativa()">
+                        + Adicionar Alternativa
+                    </button>
+                </div>
+
+                <!-- Resposta Esperada (para questões abertas) -->
+                <div class="resposta-section" id="respostaSection" style="display: none;">
+                    <h3>📝 Resposta Esperada</h3>
+                    <div class="form-group">
+                        <label for="resposta-esperada">Resposta ou Critérios de Avaliação</label>
+                        <textarea 
+                            id="resposta-esperada" 
+                            name="resposta-esperada" 
+                            placeholder="Descreva a resposta esperada ou os critérios de avaliação para esta questão dissertativa..."
+                            style="min-height: 150px;"
+                        ></textarea>
+                        <small style="color: #7f8c8d; margin-top: 0.5rem; display: block;">
+                            Para questões abertas, descreva os pontos principais que devem ser abordados na resposta.
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="filter-section">
+                    <h3>🏷️ Filtros e Categorias</h3>
+                    <div class="form-row">
+                        <div class="form-group required"></div>
+                            <label for="filtro-principal">Filtro Principal</label>
+                            <select id="filtro-principal" name="filtro-principal" required>
+                                <option value="">Selecione...</option>
+                                <option value="Adverbio">Análise Linguística</option>
+                                <option value="Romantismo">Literatura</option>
+                                <option value="redacao">Interpretação de Texto</option>
+                                <option value="novo-filtro">+ Criar Novo Filtro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dificuldade">Nível de Dificuldade</label>
+                            <select id="dificuldade" name="dificuldade" required>
+                                <option value="">Selecione...</option>
+                                <option value="facil">Fácil</option>
+                                <option value="medio">Médio</option>
+                                <option value="dificil">Difícil</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Novo Filtro Input Group (hidden by default) -->
+                    <div class="form-group" id="novoFiltroGroup" style="display: none; margin-top: 1rem;">
+                        <label for="novo-filtro-nome">Nome do Novo Filtro</label>
+                        <input 
+                            type="text" 
+                            id="novo-filtro-nome" 
+                            name="novo-filtro-nome" 
+                            placeholder="Digite o nome do novo filtro"
+                        >
+                        <button type="button" class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="criarNovoFiltro()">Criar Filtro</button>
+                    </div>
+                    
+                    <!-- Subgênero Input Group (hidden by default) -->
+                    <div class="form-group" id="subgeneroGroup">
+                        <label for="subgenero">Subgênero</label>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <select id="subgenero" name="subgenero" style="flex: 1;">
+                                <option value="">Selecione um subgênero (opcional)</option>
+                                <option value="sintaxe">Sintaxe</option>
+                                <option value="semantica">Semântica</option>
+                                <option value="morfologia">Morfologia</option>
+                                <option value="novo-subgenero">+ Criar Novo Subgênero</option>
+                            </select>
+                            <button type="button" class="btn btn-secondary" id="excluirSubgeneroBtn" style="white-space: nowrap;">Excluir Subgênero</button>
+                        </div>
+                        <small id="excluirSubgeneroMsg" style="color: #e74c3c; display: none; margin-top: 0.5rem;"></small>
+                    </div>
+                    <style>
+                        #excluirSubgeneroBtn {
+                            background: #e74c3c !important;
+                            color: #fff !important;
+                            min-width: 40px;
+                            width: 40px;
+                            padding: 0.5rem 0 !important;
+                            border-radius: 5px !important;
+                            font-size: 1.1rem !important;
+                            text-align: center;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        #excluirSubgeneroBtn:hover {
+                            background: #c0392b !important;
+                        }
+                    </style>
+
+                    <script>
+                        // Ajustar altura e largura do botão para igualar ao select de subgênero (quadrado)
+                        window.addEventListener('DOMContentLoaded', function() {
+                            const select = document.getElementById('subgenero');
+                            const btn = document.getElementById('excluirSubgeneroBtn');
+                            function ajustarTamanho() {
+                                const size = select.offsetHeight;
+                                btn.style.height = size + 'px';
+                                btn.style.width = size + 'px';
+                                btn.style.minWidth = size + 'px';
+                                btn.style.maxWidth = size + 'px';
+                            }
+                            ajustarTamanho();
+                            window.addEventListener('resize', ajustarTamanho);
+                        });
+
+                        // Excluir subgênero functionality
+                        document.getElementById('excluirSubgeneroBtn').innerHTML = '🗑️';
+                        document.getElementById('excluirSubgeneroBtn').addEventListener('click', function() {
+                            const select = document.getElementById('subgenero');
+                            const msg = document.getElementById('excluirSubgeneroMsg');
+                            const value = select.value;
+                            if (!value || value === 'novo-subgenero') {
+                                msg.textContent = 'Não há subgênero selecionado para excluir.';
+                                msg.style.display = 'block';
+                                setTimeout(() => { msg.style.display = 'none'; }, 2000);
+                                return;
+                            }
+                            // Não permitir excluir opção padrão
+                            if (value === 'sintaxe' || value === 'semantica' || value === 'morfologia') {
+                                msg.textContent = 'Não é possível excluir subgêneros padrão.';
+                                msg.style.display = 'block';
+                                setTimeout(() => { msg.style.display = 'none'; }, 2000);
+                                return;
+                            }
+                            // Remover opção selecionada
+                            const optionToRemove = select.querySelector(`option[value="${value}"]`);
+                            if (optionToRemove) {
+                                optionToRemove.remove();
+                                select.value = '';
+                                msg.textContent = 'Subgênero excluído com sucesso!';
+                                msg.style.color = '#27ae60';
+                                msg.style.display = 'block';
+                                setTimeout(() => { 
+                                    msg.style.display = 'none'; 
+                                    msg.style.color = '#e74c3c';
+                                }, 2000);
+                            }
+                        });
+                    </script>
+                    
+                    <!-- Novo Subgênero Input Group (hidden by default) -->
+                    <div class="subgenero-group" id="novoSubgeneroGroup" style="display: none;">
+                        <label for="novo-subgenero-nome">Nome do Novo Subgênero</label>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <input 
+                                type="text" 
+                                id="novo-subgenero-nome" 
+                                name="novo-subgenero-nome" 
+                                placeholder="Digite o nome do novo subgênero"
+                                style="flex: 1;"
+                            >
+                            <button type="button" class="btn add-alternativa" onclick="criarNovoSubgenero()">Criar Subgênero</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fonte (para questões da internet) -->
+                <div class="fonte-section" style="margin-top: 2rem;">
+                    <h3>🌐 Fonte da Questão</h3>
+                    <div class="fonte-toggle" style="margin-top: 1rem;">
+                        <span>Questão retirada da internet?</span>
+                        <div class="toggle-switch" id="fonteToggle"></div>
+                    </div>
+                    
+                    <div class="fonte-fields" id="fonteFields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fonte-nome">Nome da Fonte</label>
+                                <input 
+                                    type="text" 
+                                    id="fonte-nome" 
+                                    name="fonte-nome" 
+                                    placeholder="Ex: ENEM 2023, FUVEST 2022, etc."
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="fonte-ano">Ano</label>
+                                <input 
+                                    type="number" 
+                                    id="fonte-ano" 
+                                    name="fonte-ano" 
+                                    placeholder="2024"
+                                    min="1900"
+                                    max="2024"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações do Formulário -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary">Salvar Rascunho</button>
+                    <button type="button" class="btn btn-preview" onclick="previewQuestion()">Visualizar</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Criar Questão</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Preview da Questão</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div id="previewContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Character count for enunciado
+        document.getElementById('enunciado').addEventListener('input', function() {
+            const count = this.value.length;
+            document.getElementById('charCount').textContent = count;
+            
+            if (count > 1800) {
+                document.getElementById('charCount').style.color = '#e74c3c';
+            } else {
+                document.getElementById('charCount').style.color = '#7f8c8d';
+            }
+        });
+
+        // Image upload functionality
+        const imageUpload = document.getElementById('imageUpload');
+        const imageFile = document.getElementById('imageFile');
+        const imagePreview = document.getElementById('imagePreview');
+
+        imageUpload.addEventListener('click', () => imageFile.click());
+
+        imageFile.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleImageUpload(file);
+            }
+        });
+
+        // Drag and drop for images
+        imageUpload.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        imageUpload.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        imageUpload.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleImageUpload(file);
+            }
+        });
+
+        function handleImageUpload(file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Arquivo muito grande. Máximo 5MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.innerHTML = `
+                    <img src="${e.target.result}" alt="Preview" class="image-preview">
+                    <button type="button" class="remove-image" onclick="removeImage()">Remover Imagem</button>
+                `;
+                imageUpload.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage() {
+            imagePreview.innerHTML = '';
+            imageUpload.style.display = 'block';
+            imageFile.value = '';
+        }
+
+        // Add alternativa functionality
+        let alternativaCount = 4; // Já temos 4 alternativas iniciais
+        function addAlternativa() {
+            if (alternativaCount >= 10) {
+                alert('Máximo 10 alternativas permitidas.');
+                return;
+            }
+            
+            const letters = 'ABCDEFGHIJ';
+            const letter = letters[alternativaCount];
+            
+            const container = document.getElementById('alternativasContainer');
+            const newAlternativa = document.createElement('div');
+            newAlternativa.className = 'alternativa-item';
+            newAlternativa.innerHTML = `
+                <input type="radio" name="gabarito" value="${letter}" class="alternativa-radio">
+                <textarea placeholder="Alternativa ${letter}" class="alternativa-input" required style="min-height:60px;"></textarea>
+                <button type="button" class="remove-alternativa-btn" onclick="removeAlternativa(this)">×</button>
+            `;
+            
+            container.appendChild(newAlternativa);
+            alternativaCount++;
+        }
+
+        function removeAlternativa(btn) {
+            if (alternativaCount <= 2) {
+                alert('Mínimo 2 alternativas necessárias.');
+                return;
+            }
+            btn.parentElement.remove();
+            alternativaCount--;
+        }
+
+        // Tipo de questão functionality
+        document.getElementById('tipo-questao').addEventListener('change', function() {
+            const alternativasSection = document.getElementById('alternativasSection');
+            const respostaSection = document.getElementById('respostaSection');
+            const alternativasInputs = document.querySelectorAll('.alternativa-input');
+            const gabaritoInputs = document.querySelectorAll('input[name="gabarito"]');
+            
+            if (this.value === 'fechada') {
+                alternativasSection.style.display = 'block';
+                respostaSection.style.display = 'none';
+                
+                // Tornar alternativas obrigatórias
+                alternativasInputs.forEach(input => input.required = true);
+                gabaritoInputs.forEach(input => input.required = true);
+                document.getElementById('resposta-esperada').required = false;
+                
+            } else if (this.value === 'aberta') {
+                alternativasSection.style.display = 'none';
+                respostaSection.style.display = 'block';
+                
+                // Remover obrigatoriedade das alternativas
+                alternativasInputs.forEach(input => input.required = false);
+                gabaritoInputs.forEach(input => input.required = false);
+                document.getElementById('resposta-esperada').required = true;
+            }
+        });
+        
+        // Filtro principal functionality
+        document.getElementById('filtro-principal').addEventListener('change', function() {
+            const novoFiltroGroup = document.getElementById('novoFiltroGroup');
+            
+            if (this.value === 'novo-filtro') {
+                novoFiltroGroup.style.display = 'block';
+                document.getElementById('novo-filtro-nome').focus();
+            } else {
+                novoFiltroGroup.style.display = 'none';
+            }
+        });
+
+        // Subgênero functionality
+        document.getElementById('subgenero').addEventListener('change', function() {
+            const novoSubgeneroGroup = document.getElementById('novoSubgeneroGroup');
+            
+            if (this.value === 'novo-subgenero') {
+                novoSubgeneroGroup.style.display = 'block';
+                document.getElementById('novo-subgenero-nome').focus();
+            } else {
+                novoSubgeneroGroup.style.display = 'none';
+            }
+        });
+
+        function criarNovoFiltro() {
+            const nomeFiltro = document.getElementById('novo-filtro-nome').value.trim();
+            
+            if (!nomeFiltro) {
+                alert('Por favor, digite o nome do filtro.');
+                return;
+            }
+
+            // Criar nova opção no select
+            const select = document.getElementById('filtro-principal');
+            const newOption = document.createElement('option');
+            newOption.value = nomeFiltro.toLowerCase().replace(/\s+/g, '-');
+            newOption.textContent = nomeFiltro;
+            
+            // Inserir antes da opção "Criar Novo Filtro"
+            const createOption = select.querySelector('option[value="novo-filtro"]');
+            select.insertBefore(newOption, createOption);
+            
+            // Selecionar a nova opção
+            newOption.selected = true;
+            
+            // Esconder o campo de criação
+            document.getElementById('novoFiltroGroup').style.display = 'none';
+            document.getElementById('novo-filtro-nome').value = '';
+            
+            alert(`Filtro "${nomeFiltro}" criado com sucesso!`);
+        }
+
+        function criarNovoSubgenero() {
+            const nomeSubgenero = document.getElementById('novo-subgenero-nome').value.trim();
+            
+            if (!nomeSubgenero) {
+                alert('Por favor, digite o nome do subgênero.');
+                return;
+            }
+
+            // Criar nova opção no select
+            const select = document.getElementById('subgenero');
+            const newOption = document.createElement('option');
+            newOption.value = nomeSubgenero.toLowerCase().replace(/\s+/g, '-');
+            newOption.textContent = nomeSubgenero;
+            
+            // Inserir antes da opção "Criar Novo Subgênero"
+            const createOption = select.querySelector('option[value="novo-subgenero"]');
+            select.insertBefore(newOption, createOption);
+            
+            // Selecionar a nova opção
+            newOption.selected = true;
+            
+            // Esconder o campo de criação
+            document.getElementById('novoSubgeneroGroup').style.display = 'none';
+            document.getElementById('novo-subgenero-nome').value = '';
+            
+            alert(`Subgênero "${nomeSubgenero}" criado com sucesso!`);
+        }
+
+        // Fonte toggle
+        const fonteToggle = document.getElementById('fonteToggle');
+        const fonteFields = document.getElementById('fonteFields');
+        let fonteEnabled = false;
+
+        fonteToggle.addEventListener('click', function() {
+            fonteEnabled = !fonteEnabled;
+            this.classList.toggle('active');
+            fonteFields.classList.toggle('active');
+        });
+
+        // Preview functionality
+        function previewQuestion() {
+            const modal = document.getElementById('previewModal');
+            const previewContent = document.getElementById('previewContent');
+            
+            const titulo = document.getElementById('titulo').value;
+            const enunciado = document.getElementById('enunciado').value;
+            const alternativas = Array.from(document.querySelectorAll('.alternativa-input')).map(input => input.value);
+            const gabarito = document.querySelector('input[name="gabarito"]:checked')?.value;
+            
+            let preview = `
+                <h3>${titulo || 'Título da questão'}</h3>
+                <p><strong>Enunciado:</strong></p>
+                <p>${enunciado || 'Enunciado da questão...'}</p>
+            `;
+            
+            const imagePreviewImg = document.querySelector('.image-preview');
+            if (imagePreviewImg) {
+                preview += `<img src="${imagePreviewImg.src}" style="max-width: 100%; margin: 1rem 0;">`;
+            }
+            
+            preview += '<p><strong>Alternativas:</strong></p><ul>';
+            alternativas.forEach((alt, index) => {
+                const letter = 'ABCDEFGHIJ'[index];
+                const isCorrect = letter === gabarito ? ' (CORRETA)' : '';
+                preview += `<li><strong>${letter})</strong> ${alt || `Alternativa ${letter}`}${isCorrect}</li>`;
+            });
+            preview += '</ul>';
+            
+            previewContent.innerHTML = preview;
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('previewModal').style.display = 'none';
+        });
+
+        // Form submission
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('loading');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'block';
+                submitBtn.classList.remove('loading');
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center'
+                });
+                
+                // Reset form after 2 seconds
+                setTimeout(() => {
+                    this.reset();
+                    document.getElementById('successMessage').style.display = 'none';
+                    document.getElementById('charCount').textContent = '0';
+                    document.getElementById('imagePreview').innerHTML = '';
+                    imageUpload.style.display = 'block';
+                }, 2000);
+            }, 1500);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('previewModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
