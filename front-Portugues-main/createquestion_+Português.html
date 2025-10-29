@@ -126,17 +126,22 @@
             color: #e74c3c;
         }
 
+        /* ESTILOS ATUALIZADOS PARA INPUTS */
         .form-group input,
         .form-group select,
-        .form-group textarea {
+        .form-group textarea,
+        #novo-filtro-nome,
+        #novo-subgenero-nome,
+        .alternativa-input {
             width: 100%;
             padding: 1rem;
             border: 2px solid #e1e8ed;
             border-radius: 12px;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
             background: #fafbfc;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.04);
         }
 
         .form-group textarea {
@@ -146,16 +151,22 @@
 
         .form-group input:focus,
         .form-group select:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        #novo-filtro-nome:focus,
+        #novo-subgenero-nome:focus,
+        .alternativa-input:focus {
             outline: none;
             border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-            background: white;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.12);
             transform: translateY(-1px);
         }
 
         .form-group input::placeholder,
-        .form-group textarea::placeholder {
+        .form-group textarea::placeholder,
+        #novo-filtro-nome::placeholder,
+        #novo-subgenero-nome::placeholder,
+        .alternativa-input::placeholder {
             color: #bdc3c7;
         }
 
@@ -241,19 +252,21 @@
             border-left: 4px solid #f39c12;
         }
 
+        /* ESTILOS ATUALIZADOS PARA ALTERNATIVAS */
         .alternativa-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
             margin-bottom: 1.5rem;
             padding: 1rem;
-            background: white;
+            background: #fff;
             border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(241,196,15,0.04);
             transition: all 0.3s ease;
         }
 
         .alternativa-item:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(41,128,185,0.10);
         }
 
         .alternativa-radio {
@@ -263,6 +276,7 @@
         .alternativa-input {
             flex: 1;
             margin: 0;
+            min-height: 60px;
         }
 
         .remove-alternativa-btn {
@@ -313,6 +327,18 @@
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
+            border-left: 4px solid #9b59b6;
+        }
+
+        /* ESTILOS ATUALIZADOS PARA GRUPOS DE FILTRO */
+        #novoFiltroGroup,
+        #novoSubgeneroGroup,
+        .subgenero-group {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(44, 62, 80, 0.07);
+            margin-bottom: 1.5rem;
             border-left: 4px solid #9b59b6;
         }
 
@@ -538,15 +564,6 @@
         .close:hover {
             color: #000;
         }
-
-        /* Subgênero Styles */
-        .subgenero-group {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 3px solid #9b59b6;
-        }
     </style>
 </head>
 <body>
@@ -629,19 +646,19 @@
                     <div id="alternativasContainer">
                         <div class="alternativa-item">
                             <input type="radio" name="gabarito" value="A" class="alternativa-radio" required>
-                            <textarea placeholder="Alternativa A" class="alternativa-input" required style="min-height:60px;"></textarea>
+                            <textarea placeholder="Alternativa A" class="alternativa-input" required></textarea>
                         </div>
                         <div class="alternativa-item">
                             <input type="radio" name="gabarito" value="B" class="alternativa-radio">
-                            <textarea placeholder="Alternativa B" class="alternativa-input" required style="min-height:60px;"></textarea>
+                            <textarea placeholder="Alternativa B" class="alternativa-input" required></textarea>
                         </div>
                         <div class="alternativa-item">
                             <input type="radio" name="gabarito" value="C" class="alternativa-radio">
-                            <textarea placeholder="Alternativa C" class="alternativa-input" required style="min-height:60px;"></textarea>
+                            <textarea placeholder="Alternativa C" class="alternativa-input" required></textarea>
                         </div>
                         <div class="alternativa-item">
                             <input type="radio" name="gabarito" value="D" class="alternativa-radio">
-                            <textarea placeholder="Alternativa D" class="alternativa-input" required style="min-height:60px;"></textarea>
+                            <textarea placeholder="Alternativa D" class="alternativa-input" required></textarea>
                         </div>           
                     </div>
                     <button type="button" class="add-alternativa" onclick="addAlternativa()">
@@ -670,7 +687,7 @@
                 <div class="filter-section">
                     <h3>🏷️ Filtros e Categorias</h3>
                     <div class="form-row">
-                        <div class="form-group required"></div>
+                        <div class="form-group required">
                             <label for="filtro-principal">Filtro Principal</label>
                             <select id="filtro-principal" name="filtro-principal" required>
                                 <option value="">Selecione...</option>
@@ -692,7 +709,7 @@
                     </div>
                     
                     <!-- Novo Filtro Input Group (hidden by default) -->
-                    <div class="form-group" id="novoFiltroGroup" style="display: none; margin-top: 1rem;">
+                    <div class="form-group" id="novoFiltroGroup" style="display: none;">
                         <label for="novo-filtro-nome">Nome do Novo Filtro</label>
                         <input 
                             type="text" 
@@ -703,7 +720,7 @@
                         <button type="button" class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="criarNovoFiltro()">Criar Filtro</button>
                     </div>
                     
-                    <!-- Subgênero Input Group (hidden by default) -->
+                    <!-- Subgênero Input Group -->
                     <div class="form-group" id="subgeneroGroup">
                         <label for="subgenero">Subgênero</label>
                         <div style="display: flex; gap: 1rem; align-items: center;">
@@ -718,76 +735,7 @@
                         </div>
                         <small id="excluirSubgeneroMsg" style="color: #e74c3c; display: none; margin-top: 0.5rem;"></small>
                     </div>
-                    <style>
-                        #excluirSubgeneroBtn {
-                            background: #e74c3c !important;
-                            color: #fff !important;
-                            min-width: 40px;
-                            width: 40px;
-                            padding: 0.5rem 0 !important;
-                            border-radius: 5px !important;
-                            font-size: 1.1rem !important;
-                            text-align: center;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
-                        #excluirSubgeneroBtn:hover {
-                            background: #c0392b !important;
-                        }
-                    </style>
 
-                    <script>
-                        // Ajustar altura e largura do botão para igualar ao select de subgênero (quadrado)
-                        window.addEventListener('DOMContentLoaded', function() {
-                            const select = document.getElementById('subgenero');
-                            const btn = document.getElementById('excluirSubgeneroBtn');
-                            function ajustarTamanho() {
-                                const size = select.offsetHeight;
-                                btn.style.height = size + 'px';
-                                btn.style.width = size + 'px';
-                                btn.style.minWidth = size + 'px';
-                                btn.style.maxWidth = size + 'px';
-                            }
-                            ajustarTamanho();
-                            window.addEventListener('resize', ajustarTamanho);
-                        });
-
-                        // Excluir subgênero functionality
-                        document.getElementById('excluirSubgeneroBtn').innerHTML = '🗑️';
-                        document.getElementById('excluirSubgeneroBtn').addEventListener('click', function() {
-                            const select = document.getElementById('subgenero');
-                            const msg = document.getElementById('excluirSubgeneroMsg');
-                            const value = select.value;
-                            if (!value || value === 'novo-subgenero') {
-                                msg.textContent = 'Não há subgênero selecionado para excluir.';
-                                msg.style.display = 'block';
-                                setTimeout(() => { msg.style.display = 'none'; }, 2000);
-                                return;
-                            }
-                            // Não permitir excluir opção padrão
-                            if (value === 'sintaxe' || value === 'semantica' || value === 'morfologia') {
-                                msg.textContent = 'Não é possível excluir subgêneros padrão.';
-                                msg.style.display = 'block';
-                                setTimeout(() => { msg.style.display = 'none'; }, 2000);
-                                return;
-                            }
-                            // Remover opção selecionada
-                            const optionToRemove = select.querySelector(`option[value="${value}"]`);
-                            if (optionToRemove) {
-                                optionToRemove.remove();
-                                select.value = '';
-                                msg.textContent = 'Subgênero excluído com sucesso!';
-                                msg.style.color = '#27ae60';
-                                msg.style.display = 'block';
-                                setTimeout(() => { 
-                                    msg.style.display = 'none'; 
-                                    msg.style.color = '#e74c3c';
-                                }, 2000);
-                            }
-                        });
-                    </script>
-                    
                     <!-- Novo Subgênero Input Group (hidden by default) -->
                     <div class="subgenero-group" id="novoSubgeneroGroup" style="display: none;">
                         <label for="novo-subgenero-nome">Nome do Novo Subgênero</label>
@@ -946,7 +894,7 @@
             newAlternativa.className = 'alternativa-item';
             newAlternativa.innerHTML = `
                 <input type="radio" name="gabarito" value="${letter}" class="alternativa-radio">
-                <textarea placeholder="Alternativa ${letter}" class="alternativa-input" required style="min-height:60px;"></textarea>
+                <textarea placeholder="Alternativa ${letter}" class="alternativa-input" required></textarea>
                 <button type="button" class="remove-alternativa-btn" onclick="removeAlternativa(this)">×</button>
             `;
             
@@ -1153,6 +1101,55 @@
             const modal = document.getElementById('previewModal');
             if (e.target === modal) {
                 modal.style.display = 'none';
+            }
+        });
+
+        // Ajustar altura do botão de excluir subgênero
+        window.addEventListener('DOMContentLoaded', function() {
+            const select = document.getElementById('subgenero');
+            const btn = document.getElementById('excluirSubgeneroBtn');
+            function ajustarTamanho() {
+                const size = select.offsetHeight;
+                btn.style.height = size + 'px';
+                btn.style.width = size + 'px';
+                btn.style.minWidth = size + 'px';
+                btn.style.maxWidth = size + 'px';
+            }
+            ajustarTamanho();
+            window.addEventListener('resize', ajustarTamanho);
+        });
+
+        // Excluir subgênero functionality
+        document.getElementById('excluirSubgeneroBtn').innerHTML = '🗑️';
+        document.getElementById('excluirSubgeneroBtn').addEventListener('click', function() {
+            const select = document.getElementById('subgenero');
+            const msg = document.getElementById('excluirSubgeneroMsg');
+            const value = select.value;
+            if (!value || value === 'novo-subgenero') {
+                msg.textContent = 'Não há subgênero selecionado para excluir.';
+                msg.style.display = 'block';
+                setTimeout(() => { msg.style.display = 'none'; }, 2000);
+                return;
+            }
+            // Não permitir excluir opção padrão
+            if (value === 'sintaxe' || value === 'semantica' || value === 'morfologia') {
+                msg.textContent = 'Não é possível excluir subgêneros padrão.';
+                msg.style.display = 'block';
+                setTimeout(() => { msg.style.display = 'none'; }, 2000);
+                return;
+            }
+            // Remover opção selecionada
+            const optionToRemove = select.querySelector(`option[value="${value}"]`);
+            if (optionToRemove) {
+                optionToRemove.remove();
+                select.value = '';
+                msg.textContent = 'Subgênero excluído com sucesso!';
+                msg.style.color = '#27ae60';
+                msg.style.display = 'block';
+                setTimeout(() => { 
+                    msg.style.display = 'none'; 
+                    msg.style.color = '#e74c3c';
+                }, 2000);
             }
         });
     </script>

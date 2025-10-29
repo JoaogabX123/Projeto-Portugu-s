@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizar Questão - +Português</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      color: #2c3e50;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 120px 20px 50px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 3px solid #3498db;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e74c3c;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo::before {
+      content: "📚";
+      font-size: 1.8rem;
+    }
+
+    /* Card da questão */
+    .question-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      position: relative;
+      animation: fadeInUp 1s ease;
+    }
+
+    .question-card h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .question-meta {
+      font-size: 0.95rem;
+      color: #7f8c8d;
+      margin-bottom: 25px;
+    }
+
+    .question-text {
+      margin-bottom: 30px;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: #34495e;
+    }
+
+    .options {
+      margin-bottom: 25px;
+    }
+
+    .option {
+      background: #ecf0f1;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .option:hover {
+      background: #d6eaf8;
+    }
+
+    .correct {
+      border: 2px solid #27ae60;
+      background: #eafaf1;
+      font-weight: 600;
+    }
+
+    .question-info {
+      margin-top: 25px;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .question-info strong {
+      color: #2c3e50;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.9rem 1.8rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #3498db;
+      border: 2px solid #3498db;
+    }
+
+    .btn-outline:hover {
+      background: #3498db;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      color: white;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+      background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .question-card {
+        padding: 25px;
+      }
+      .question-card h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">+Português</a>
+      <div class="nav-buttons">
+        <a href="relatorios.html" class="btn btn-outline">Relatórios</a>
+        <a href="criar_questao.html" class="btn btn-primary">Nova Questão</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo -->
+  <div class="container">
+    <div class="question-card">
+      <h2>Questão: Interpretação de texto - Machado de Assis</h2>
+      <p class="question-meta">Criada em: <strong>27/10/2025</strong> | Dificuldade: <strong>Média</strong></p>
+
+      <div class="question-text">
+        <p><strong>Texto base:</strong> Trecho de “Memórias Póstumas de Brás Cubas”.</p>
+        <p>“Não tive filhos, não transmiti a nenhuma criatura o legado da nossa miséria.”</p>
+        <p><strong>Enunciado:</strong> O trecho acima apresenta uma característica marcante do narrador machadiano. Qual alternativa expressa corretamente essa característica?</p>
+      </div>
+
+      <div class="options">
+        <div class="option">A) A ironia e o pessimismo do narrador em relação à vida.</div>
+        <div class="option">B) O desejo de perpetuar seus valores através da família.</div>
+        <div class="option correct">C) A crítica à sociedade e à vaidade humana.</div>
+        <div class="option">D) A idealização romântica da morte.</div>
+        <div class="option">E) A ausência de reflexão filosófica sobre a existência.</div>
+      </div>
+
+      <div class="question-info">
+        <p><strong>Gênero:</strong> Narrativo | <strong>Subgênero:</strong> Romance | <strong>Fonte:</strong> Domínio público</p>
+      </div>
+
+      <div class="buttons">
+        <a href="criar_questao.html" class="btn btn-primary">✏️ Editar Questão</a>
+        <a href="#" class="btn btn-outline">🗑️ Excluir</a>
+        <a href="relatorios.html" class="btn btn-outline">⬅️ Voltar</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
